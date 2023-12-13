@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository.Implementations
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public abstract class BaseRepository<T> : IRepository<T> where T : class
     {
 
         private readonly DbSet<T> _set;
         private readonly DbContext _context;
 
-        public Repository(DbContext context)
+        public BaseRepository(DbContext context)
         {
             _context = context;
             _set = _context.Set<T>();
@@ -34,7 +34,7 @@ namespace DAL.Repository.Implementations
             return _set.Where(predicate).ToList();
         }
 
-        public T GetById(int id)
+        public virtual T GetById(int id)
         {
             return _set.Find(id);
         }

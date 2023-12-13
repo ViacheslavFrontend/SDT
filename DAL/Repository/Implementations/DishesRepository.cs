@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository.Implementations
 {
-    public class DishesRepository : Repository<Dish>, IDishesRepository
+    public class DishesRepository : BaseRepository<Dish>, IDishesRepository
     {
         public DishesRepository(DbContext db) : base(db)
         {

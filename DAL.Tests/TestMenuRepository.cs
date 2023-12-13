@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Tests
 {
-    internal class TestMenuRepository : MenusRepository
+    public class TestMenuRepository : MenusRepository
     {
         public TestMenuRepository(DbContext db) : base(db)
         {

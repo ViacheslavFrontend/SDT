@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository.Implementations
 {
-    public class ProductsRepository : Repository<Product>, IProductsRepository
+    public class ProductsRepository : BaseRepository<Product>, IProductsRepository
     {
         public ProductsRepository(DbContext db) : base(db)
         {

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Repository.Implementations
 {
-    public class MenusRepository : Repository<Menu>, IMenusRepository
+    public class MenusRepository : BaseRepository<Menu>, IMenusRepository
     {
         public MenusRepository(DbContext db) : base(db)
         {
