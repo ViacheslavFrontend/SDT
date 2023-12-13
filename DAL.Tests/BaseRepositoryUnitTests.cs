@@ -98,12 +98,6 @@ namespace DAL.Tests
 
             Menu expectedMenu = new Menu() { Id = 1, Name = "Дієтичне меню" };
 
-            var mockRepository = new Mock<TestMenuRepository>(mockContext.Object);
-
-            mockRepository.Setup(repo =>
-                repo.GetById(expectedMenu.Id)
-                ).Returns(expectedMenu);
-
             var repository = new TestMenuRepository(mockContext.Object);
 
             // Act
@@ -112,6 +106,26 @@ namespace DAL.Tests
             // Assert
             mockDbSet.Verify(
                 dbSet => dbSet.Update(expectedMenu), Times.Once
+                );
+        }
+
+
+        [Fact]
+        public void Save_NoInput_CalledSaveMethodOfDbContext()
+        {
+            // Arrange
+            DbContextOptions opt = new DbContextOptionsBuilder<FoodAppDbContext>().Options;
+            var mockContext = new Mock<FoodAppDbContext>(opt);
+
+
+            var repository = new TestMenuRepository(mockContext.Object);
+
+            // Act
+            repository.Save();
+
+            // Assert
+            mockContext.Verify(
+                dbContext => dbContext.SaveChanges(), Times.Once
                 );
         }
     }
