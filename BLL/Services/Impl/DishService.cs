@@ -29,7 +29,7 @@ namespace BLL.Services.Impl
         public IEnumerable<DishDTO> GetDishesByMenu(int menuId)
         {
             var user = SecurityContext.GetUser();
-            if(user.GetType() != typeof(Chief) && user.GetType() != typeof(Accountant))
+            if(user.GetType() != typeof(Chief))
             {
                 throw new MethodAccessException();
             }
