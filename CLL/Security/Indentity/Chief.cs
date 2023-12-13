@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CLL.Security.Indentity
 {
-    public class Acountant : User
+    public class Chief : User
     {
-        public Acountant(int id, string name) : base(id, name, nameof(Acountant))
+        public Chief(int id, string name) : base(id, name, nameof(Chief))
         {
         }
     }
