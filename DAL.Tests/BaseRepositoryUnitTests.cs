@@ -81,5 +81,38 @@ namespace DAL.Tests
                 dbSet => dbSet.Remove(expectedMenu), Times.Once
                 );
         }
+
+        [Fact]
+        public void Update_InputMenu_CalledUpdateMethodOfDbSetWithInputMenu()
+        {
+            // Arrange
+            DbContextOptions opt = new DbContextOptionsBuilder<FoodAppDbContext>().Options;
+            var mockContext = new Mock<FoodAppDbContext>(opt);
+            var mockDbSet = new Mock<DbSet<Menu>>();
+
+            mockContext
+               .Setup(context =>
+                   context.Set<Menu>(
+                       ))
+               .Returns(mockDbSet.Object);
+
+            Menu expectedMenu = new Menu() { Id = 1, Name = "Дієтичне меню" };
+
+            var mockRepository = new Mock<TestMenuRepository>(mockContext.Object);
+
+            mockRepository.Setup(repo =>
+                repo.GetById(expectedMenu.Id)
+                ).Returns(expectedMenu);
+
+            var repository = new TestMenuRepository(mockContext.Object);
+
+            // Act
+            repository.Update(expectedMenu);
+
+            // Assert
+            mockDbSet.Verify(
+                dbSet => dbSet.Update(expectedMenu), Times.Once
+                );
+        }
     }
 }
